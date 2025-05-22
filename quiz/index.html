@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Викторина</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container" id="quiz">
+        <h2 id="question">Здесь будет вопрос</h2>
+        <ul>
+            <li><label><input type="radio" name="answer" value="A"> <span id="a_text"></span></label></li>
+            <li><label><input type="radio" name="answer" value="B"> <span id="b_text"></span></label></li>
+            <li><label><input type="radio" name="answer" value="C"> <span id="c_text"></span></label></li>
+            <li><label><input type="radio" name="answer" value="D"> <span id="d_text"></span></label></li>
+        </ul>
+        <button id="submit">Ответить</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
