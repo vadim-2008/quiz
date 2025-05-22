@@ -58,3 +58,23 @@ button:hover {
     color: red;
     font-weight: bold;
 }
+#correct-answers-list {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#correct-answers-list li {
+    margin-bottom: 8px;
+}
+
+/* Стили для выделения правильных/неправильных ответов */
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+}
