@@ -45,3 +45,16 @@ button:hover {
     margin-top: 20px;
     font-weight: bold;
 }
+.result-item {
+    margin-bottom: 15px;
+}
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+}

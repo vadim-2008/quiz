@@ -43,6 +43,7 @@ const quizData = [
 
 let currentQuestion = 0;
 let score = 0;
+let userAnswers = [];
 
 const questionEl = document.getElementById("question");
 const aText = document.getElementById("a_text");
@@ -73,23 +74,53 @@ submitBtn.addEventListener("click", () => {
     });
 
     if (selectedAnswer) {
-        if (selectedAnswer.toLowerCase() === quizData[currentQuestion].correct) {
-            score++;
-        }
+        const correctAnswer = quizData[currentQuestion].correct;
+        const isCorrect = selectedAnswer.toLowerCase() === correctAnswer;
+        if (isCorrect) score++;
+
+        userAnswers.push({
+            question: quizData[currentQuestion].question,
+            user: selectedAnswer,
+            correct: correctAnswer,
+            isCorrect
+        });
 
         currentQuestion++;
 
         if (currentQuestion < quizData.length) {
             loadQuestion();
+            answerEls.forEach(el => el.checked = false);
         } else {
-            document.querySelector(".quiz-container").innerHTML = `
-                <h2>Вы ответили правильно на ${score} из ${quizData.length} вопросов.</h2>
-                <button onclick="location.reload()">Попробовать снова</button>
-            `;
+            showResults();
         }
     } else {
         resultEl.textContent = "Выберите вариант ответа!";
     }
 });
 
-loadQuestion();
+function showResults() {
+    document.querySelector(".quiz-container").innerHTML = `
+        <h2>Результаты</h2>
+        <p>Вы ответили правильно на <strong>${score} из ${quizData.length}</strong> вопросов.</p>
+        <div id="results-list"></div>
+        <button onclick="location.reload()">Попробовать снова</button>
+    `;
+
+    const resultsList = document.getElementById("results-list");
+
+    userAnswers.forEach((item, index) => {
+        const userAnswer = item.user.toUpperCase();
+        const correctAnswer = item.correct.toUpperCase();
+
+        const div = document.createElement("div");
+        div.classList.add("result-item");
+
+        div.innerHTML = `
+            <strong>Вопрос ${index + 1}:</strong> ${item.question}<br>
+            Ваш ответ: <span class="${userAnswer === correctAnswer ? 'correct' : 'wrong'}">${userAnswer}</span><br>
+            Правильный ответ: <span class="correct">${correctAnswer}</span>
+            <hr>
+        `;
+        resultsList.appendChild(div);
+    });
+}
